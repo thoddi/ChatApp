@@ -1,0 +1,12 @@
+{
+  "name": "Client",
+  "authors": [
+    "thoddi <thorvardur13@ru.is>"
+  ],
+  "description": "Chatclient",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "private": true
+}
