@@ -1,13 +1,18 @@
 "use strict";
+angular.module('chatApp', ['ngRoute']);
 
-angular.module('chatapp', ['ngRoute'])
-.config($routeProvider) {
-    $routeProvider
-        .when('/', { templateUrl: 'login/login.html', controller: 'LoginController' })
-        .when('/signup', { templateUrl: 'signup/signup.html', controller: 'SignUpController' })
-        /*.when('/:user/', { templateUrl: 'rooms/rooms.html', controller: 'RoomsController' })
-        .when('/room/:user/:room/', { templateUrl: 'Views/room.html', controller: 'RoomController' })*/
-        .otherwise({
-            redirectTo: '/'
+angular.module('chatApp').config(["$routeProvider", function ($routProvider) {
+    $routeProvider.when('/login', { 
+            templateUrl: 'login/login.html', 
+            controller: 'LoginController' 
+        }).when('/signup', { 
+            templateUrl: 'signup/signup.html', 
+            controller: 'SignUpController' 
+        }).otherwise({
+            redirectTo: '/login'
         });
-}
+}]);
+
+angular.module("chatApp").controller("HomeController", function($scope){
+    $scope.message = "What's happening now?";
+});
