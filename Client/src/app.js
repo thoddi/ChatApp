@@ -6,8 +6,8 @@ function ($routeProvider) {
             templateUrl: 'src/Login/login.html', 
             controller: 'LoginController' 
         }).when('/signup', { 
-            templateUrl: 'src/signup/signup.html', 
-            controller: 'SignUpController' 
+            templateUrl: 'src/Signup/signup.html', 
+            controller: 'SignupController' 
         }).otherwise({
             redirectTo: '/login'
         });

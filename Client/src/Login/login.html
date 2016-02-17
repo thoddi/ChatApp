@@ -1,12 +1,14 @@
-<div>{{message}}</div>
-
-<button ng-click="clickMe()">Click me</button>
-<!--
 <div>
-    <label>Nafn: </label>
-    <input type="text" name="name"/>
-    <label>Password: </label>
-    <input type="password" name="password"/>
-    <button name="userbutton"/>
+    <div class="row">
+        <label>Nafn: </label>
+        <input type="text" name="name"/>
+    </div>
+    <div class="row">
+        <label>Password: </label>
+        <input type="password" name="password"/>
+    </div>
+    <div class="row">
+        <button ng-click="logIn()">Log In</button>
+        <span>{{errorMessage}}</span>
+    </div>
 </div>
--->
