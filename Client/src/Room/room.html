@@ -1,0 +1,17 @@
+<div>
+    <h3>{{roomName}}</h3>
+    <button ng-click="go()">Screw yu guys, I'm a-going home!</button>
+    <span>
+        <ul ng-repeat="user in users">
+            <li>{{user}}</li>
+        </ul>
+    </span>
+    <span>
+        <ul ng-repeat="msg in msgs">
+            <li>{{msg.nick}}</li>
+            {{msg.message}}
+        </ul>
+        <input type="text" ng-model="newMsg"/>
+        <button ng-click="send()">Send</button>
+    </span>
+</div>

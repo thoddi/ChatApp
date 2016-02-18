@@ -1,24 +1,24 @@
 "use strict";
 angular.module("chatApp").controller("LoginController",
-function LoginController($scope, $location, socket) {
+function LoginController($scope, $location, $routeParams, socket) {
     
     $scope.errorMessage = "";
-    $scope.name = "";
+    $scope.user = "";
     
     $scope.logIn = function logIn() {
-        if($scope.name === "") {
+        if($scope.user === "") {
             $scope.errorMessage = "You are going to have to choose a name, buddy!";
         }
         else {
-            socket.emit("adduser", $scope.name, function(available) {
+            socket.emit("adduser", $scope.user, function(available) {
                 if(available) {
-                    $location.path($scope.name + "/rooms");
+                    $location.path($scope.user + "/rooms");
                 }
                 else {
-                    $scope.errorMessage = "Sorry, buddy. \"" + $scope.name + 
-                        " is taken... and there can only be one " + $scope.name;
+                    $scope.errorMessage = "Sorry, buddy. \"" + $scope.user + 
+                        " is taken... and there can only be one " + $scope.user;
                 }
             });
         }
-    }
+    };
 });

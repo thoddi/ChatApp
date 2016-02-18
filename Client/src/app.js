@@ -5,10 +5,14 @@ function ($routeProvider) {
     $routeProvider.when('/login', { 
             templateUrl: 'src/Login/login.html', 
             controller: 'LoginController' 
-        }).when('/signup', { 
-            templateUrl: 'src/Signup/signup.html', 
-            controller: 'SignupController' 
-        }).otherwise({
+        }).when('/:user/rooms', {
+            templateUrl: 'src/Rooms/rooms.html',
+            controller: 'RoomsController'
+        }).when('/:user/:roomName', {
+            templateUrl: 'src/Room/room.html',
+            controller: 'RoomController'
+        })
+        .otherwise({
             redirectTo: '/login'
         });
 }]);

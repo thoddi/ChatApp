@@ -1,0 +1,38 @@
+<div>
+    <h2>{{user}}, my buddy! Select a room and join your other buddies.</h2>
+    
+    <button ng-click="logOut()">Log out</button>
+    
+    <div class="row">
+        <span>
+            <ul>
+                <a ng-repeat="(key, room) in rooms" href="#/{{user}}/{{key}}">
+                    <li>{{key}}</li>
+                    {{room.topic}}
+                </a>
+            </ul>
+        </span>
+        <span>
+            <ul>
+                <li ng-repeat="user in users">{{user}}</li>
+            </ul>
+        </span>
+    </div>
+    <div class="row">
+        <h3>Whaaaat??! You can make your own Room!</h3>
+        <input type="text" ng-model="roomName"/>
+        <button ng-click="makeRoom()">Make Room</button>
+        {{errorMessage}}
+    </div>
+    <div>
+        <select id="sendto">
+            <option id="{{user}}" ng-repeat="user in users" value="{{user}}">{{user}}</option>
+        </select>
+        <ul ng-repeat="msg in msgs">
+            <li>{{msg.nick}}</li>
+            {{msg.message}}
+        </ul>
+        <input type="text" ng-model="newMsg"/>
+        <button ng-click="send()">Send</button>
+    </div>
+</div>
