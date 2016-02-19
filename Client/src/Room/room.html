@@ -1,17 +1,40 @@
-<div>
-    <h3>{{roomName}}</h3>
-    <button ng-click="go()">Screw yu guys, I'm a-going home!</button>
-    <span>
-        <ul ng-repeat="user in users">
-            <li>{{user}}</li>
-        </ul>
-    </span>
-    <span>
-        <ul ng-repeat="msg in msgs">
-            <li>{{msg.nick}}</li>
-            {{msg.message}}
-        </ul>
-        <input type="text" ng-model="newMsg"/>
-        <button ng-click="send()">Send</button>
-    </span>
+<div class="well">
+    <dev class="row">
+        <dev class="panel panel-primary">
+            <dev class="panel-header">
+                <h2>{{roomName}}</h2>
+                <h3>{{roomTopic}}</h3>
+            </dev>
+            <div class="col-lg-4">
+                <dev class="panel-body">
+                    <div class="list-group">
+                        <button type="button" id="popover" class="list-group-item" ng-repeat="user in users">
+                            {{user}}
+                        </button>
+                    </div>
+                </dev>
+            </div>
+            <div class="col-lg-8">
+                <span class="list-group">
+                    <ul class="list-group-item" ng-repeat="msg in msgs">
+                        <li>{{msg.nick}}</li>
+                        {{msg.message}}
+                    </ul>
+                    <div class="list-group-item">
+                        <input id="msginput" type="text" class="form-control" ng-model="newMsg"/>
+                        <span class="input-group-control">
+                            <button class="btn btn-default" ng-click="send()">Send</button>
+                        </span>
+                    </div>
+                </span>
+            </dev>
+        </dev>
+    </dev>
+    <div class="row">
+        <button class="btn btn-default" ng-click="go()">Screw yu guys, I'm a-going home!</button>
+        
+        <button type="button" id="popover" class="user-pop list-group-item" data-toggle="popover">
+            Click to toggle popover
+        </button>
+    </div>
 </div>
