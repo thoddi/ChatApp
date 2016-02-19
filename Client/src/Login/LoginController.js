@@ -5,6 +5,8 @@ function LoginController($scope, $location, $routeParams, socket) {
     $scope.errorMessage = "";
     $scope.user = "";
     
+    document.getElementById("logout").style.visibility = 'hidden';
+    
     $scope.logIn = function logIn() {
         if($scope.user === "") {
             $scope.errorMessage = "You are going to have to choose a name, buddy!";

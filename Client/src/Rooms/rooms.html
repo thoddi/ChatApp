@@ -1,29 +1,49 @@
-<div>
+<div class="well">
     <h2>{{user}}, my buddy! Select a room and join your other buddies.</h2>
     
-    <button ng-click="logOut()">Log out</button>
+    <!--<button ng-click="logOut()">Log out</button>-->
     
     <div class="row">
-        <span>
-            <ul>
-                <a ng-repeat="(key, room) in rooms" href="#/{{user}}/{{key}}">
-                    <li>{{key}}</li>
-                    {{room.topic}}
-                </a>
-            </ul>
-        </span>
-        <span>
-            <ul>
-                <li ng-repeat="user in users">{{user}}</li>
-            </ul>
-        </span>
+        <div class="col-lg-8">
+            <div class="panel panel-primary">
+                <div class="panel-header">
+                    <h3>Available Rooms</h3>
+                </div>
+                <div class="list-group">
+                    <a class="list-group-item" ng-repeat="(key, room) in rooms" href="#/{{user}}/{{key}}">
+                        <h4 class="list-group-item-heading">{{key}}</h4>
+                        <p class="list-group-item-text">{{room.topic}}</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="panel panel-primary">
+                <div class="panel-header">
+                    <h3>Other buddies logged in</h3>
+                </div>
+                <div class="list-group">
+                    <button class="list-group-item" ng-repeat="user in users">{{user}}</button>
+                </div>
+            </div>
+        </div>
     </div>
+    
     <div class="row">
-        <h3>Whaaaat??! You can make your own Room!</h3>
-        <input type="text" ng-model="roomName"/>
-        <button ng-click="makeRoom()">Make Room</button>
-        {{errorMessage}}
+        <div class="col-lg-4">
+            <h3>Whaaaat??! You can make your own Room!</h3>
+            <div class="input-group">
+                <input class="form-control" placeholder="Name a room..." type="text" ng-model="roomName"/>
+                <span class="input-group-btn">
+                    <button class="btn btn-default" ng-click="makeRoom()">Make Room</button>
+                </span>
+            </div>
+            <div class="alert alert-danger" ng-cloak ng-show="errorMessage != ''">
+                {{errorMessage}}
+            </div>
+        </div>
     </div>
+    <!--
     <div>
         <select id="sendto">
             <option id="{{user}}" ng-repeat="user in users" value="{{user}}">{{user}}</option>
@@ -35,4 +55,5 @@
         <input type="text" ng-model="newMsg"/>
         <button ng-click="send()">Send</button>
     </div>
+    -->
 </div>

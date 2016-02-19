@@ -1,13 +1,30 @@
 <!DOCTYPE html>
-<html ng-app="chatApp">
+<html ng-app="chatApp" lang="en">
     <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
         <title>Awesome Chat</title>
     </head>
-    <body>
-        <h1>The One and Only ChatRoom</h1>
+    <body><nav class="navbar navbar-inverse">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">THE ONE AND ONLY CHATROOM</a>
+                </div>
+                <div id="navbar" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav nav-right">
+                        <li id="logout" ng-click="logOut()"><a href="#/">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
         
-        <div ng-view></div>
-        <div id="privchat"></div>
+        <div ng-view>Just a moment... almost there...</div>
             
         <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.js"></script>-->
         <script src="bower_components/angular/angular.js"></script>

@@ -6,7 +6,8 @@ angular.module('chatApp').controller('RoomsController', function($scope, socket,
     $scope.errorMessage = "";
     $scope.roomName = "";
     $scope.msgs = {};
-    var sendTo = document.getElementById("sendto").selected;
+    //var sendTo = document.getElementById("sendto").selected;
+    document.getElementById("logout").style.visibility = 'visible';
     
     socket.emit('rooms');
 	socket.on('roomlist', function(roomsList){
