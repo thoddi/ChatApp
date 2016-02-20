@@ -5,14 +5,13 @@ angular.module('chatApp').controller('RoomsController', function($scope, socket,
     $scope.rooms;
     $scope.errorMessage = "";
     $scope.roomName = "";
-    $scope.msgs = {};
-    //var sendTo = document.getElementById("sendto").selected;
+    $scope.msgs = [];
+    var sendTo = document.getElementById("sendto").selected;
     document.getElementById("logout").style.visibility = 'visible';
     
     socket.emit('rooms');
 	socket.on('roomlist', function(roomsList){
 		$scope.rooms = roomsList;
-        //console.log($scope.rooms);
 	});
     
     $scope.makeRoom = function makeRoom() {
@@ -35,20 +34,13 @@ angular.module('chatApp').controller('RoomsController', function($scope, socket,
 	});
         
     socket.on('recv_privatemsg', function (sender, msg) {
-        if(sendTo === sender) {
-                $scope.msgs.push({
-                sender: sender,
-                msg: msg
-            });
-        }
-        else {
-            $scope.msgs = {
-                sender: sender,
-                msg: msg
-            };
-            sendTo = sender;
-            document.getElementById(sender).selected = true;
-        }
+        $scope.msgs.push({
+            sender: sender,
+            msg: msg
+        });
+        console.log("Message! " + $scope.msgs.sender + " " + $scope.msgs.msg);
+        sendTo = sender;
+        console.log($scope.msgs);
     });
     
     $scope.send = function send() {

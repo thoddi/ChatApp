@@ -43,17 +43,15 @@
             </div>
         </div>
     </div>
-    <!--
     <div>
-        <select id="sendto">
+        <select id="sendto" ng-model="selected" ng-change="chooseUser(selected)">
             <option id="{{user}}" ng-repeat="user in users" value="{{user}}">{{user}}</option>
         </select>
-        <ul ng-repeat="msg in msgs">
-            <li>{{msg.nick}}</li>
-            {{msg.message}}
-        </ul>
         <input type="text" ng-model="newMsg"/>
         <button ng-click="send()">Send</button>
+        <ul ng-repeat="msg in msgs">
+            <li>{{msg.sender}}</li>
+            {{msg.msg}}
+        </ul>
     </div>
-    -->
 </div>
