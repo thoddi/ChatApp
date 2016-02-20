@@ -45,6 +45,7 @@ angular.module('chatApp').controller('RoomsController', function($scope, socket,
     
     $scope.send = function send() {
         socket.emit('privatemsg', {nick: sendTo, message: $scope.newMsg});
+        $scope.msgs.push({sender: $scope.user, msg: $scope.newMsg});
     }
     
     $scope.chooseUser = function chooseUser(user) {
