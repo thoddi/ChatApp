@@ -23,7 +23,7 @@
                     <h3>Other buddies logged in</h3>
                 </div>
                 <div class="list-group">
-                    <button class="list-group-item" ng-repeat="user in users">{{user}}</button>
+                    <button class="list-group-item" ng-repeat="user in users" ng-click="addSender(user)">{{user}}</button>
                 </div>
             </div>
         </div>
@@ -43,7 +43,7 @@
             </div>
         </div>
     </div>
-    <div>
+    <!--<div>
         <select id="sendto" ng-model="selected" ng-change="chooseUser(selected)">
             <option id="{{user}}" ng-repeat="user in users" value="{{user}}">{{user}}</option>
         </select>
@@ -53,5 +53,25 @@
             <li>{{msg.sender}}</li>
             {{msg.msg}}
         </ul>
+    </div>-->
+    
+    
+    <div class="row">
+        <div class="col-md-3 pull-right" ng-repeat="sender in senders">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{sender.nick}}</h3>
+                </div>
+                <div class="panel-body"> 
+                    <p ng-repeat="msg in sender.msgs"><strong>{{msg.nick}}:</strong> {{msg.msg}}</p>
+                    <div class="input-group">
+                        <input id="{{sender.nick}}" type="text" class="form-control" ng-model="newMsg"/>
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" ng-click="send(sender.nick)">Send</button>
+                        </span>
+                    </div><!-- /input-group -->
+                </div><!-- pannel-body -->
+            </div><!-- pannel -->
+        </div>
     </div>
 </div>
