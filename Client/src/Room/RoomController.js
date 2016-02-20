@@ -1,18 +1,12 @@
 "use strict";
 angular.module('chatApp').controller('RoomController', function($scope, socket, $routeParams, $location) {
     
-    $('.user-pop').popover({
+    /*$('#popover').popover({
         title: "<h1><strong>HTML</strong> inside <code>the</code> <em>popover</em></h1>", 
         content: "Blabla <br> <h2>Cool stuff!</h2>", 
         html: true, 
         placement: "right"
-    }); 
-    $('#popover').popover({
-        title: "<h1><strong>HTML</strong> inside <code>the</code> <em>popover</em></h1>", 
-        content: "Blabla <br> <h2>Cool stuff!</h2>", 
-        html: true, 
-        placement: "right"
-    });
+    });*/
     $scope.currUser = $routeParams.user;
     $scope.roomName = $routeParams.roomName;
     var joinObj = {
@@ -22,12 +16,37 @@ angular.module('chatApp').controller('RoomController', function($scope, socket, 
     
     // TODO: Sjá til þess að þegar einhver býr til herbergi
     //          þá er notandinn á listanum.
-        
-    socket.emit('joinroom', joinObj);
+    
+    socket.emit('rooms');
+    socket.on('roomlist', function (rooms) {
+        if(rooms[$scope.roomName] !== undefined) {
+            if(rooms[$scope.roomName].banned[$scope.currUser] !== undefined) {
+                // TODO: Í hvert skifti sem hann er kick-aður, þá fær hann
+            //      alert 1+ oftar.
+            
+            $location.path('/' + $scope.currUser + '/rooms');
+            alert("I'm not your guy, buddy!\nYou are banned from " + room + " by " + baner);
+            }
+        }
+    });
+    
+    socket.emit('joinroom', joinObj, function (success, reason) {
+        if(!success) {
+            alert(reason);
+        }
+    });
     socket.on('updateusers', function(room, users, ops) {
         if($scope.roomName === room) {
             $scope.users = users;
             $scope.ops = ops;
+            if(ops[$scope.currUser] !== undefined) {
+                document.getElementById('kick').style.visibility = "visible";
+                document.getElementById('ban').style.visibility = "visible";
+                socket.emit('users');
+                socket.on('userlist', function (allUsers) {
+                    $scope.allUsers = allUsers;
+                })
+            }
         }
     });
     
@@ -50,11 +69,67 @@ angular.module('chatApp').controller('RoomController', function($scope, socket, 
         $location.path($scope.currUser + '/rooms');
     };
     
+    $scope.kick = function kick() {
+        if($scope.ops[$scope.currUser] !== undefined) {
+            var banUser = document.getElementById('userkick').value;
+            socket.emit('kick', {
+                user: banUser,
+                room: $scope.roomName
+            });
+            console.log('kick sent');
+        }
+        else {
+            console.log('kick not sent');
+        }
+    };
     
-});
-
-angular.module('chatApp').directive('popover', function() {
-    return function(scope, elem) {
-        elem.popover();
+    socket.on('kicked', function (room, user, baner) {
+        if($scope.currUser === user) {
+            
+            // TODO: Í hvert skifti sem hann er kick-aður, þá fær hann
+            //      alert 1+ oftar.
+            
+            $location.path('/' + $scope.currUser + '/rooms');
+            alert("I'm not your friend, buddy!\nYou were just kicked out of " + room + " by " + baner);
+        }
+    });
+    
+    $scope.ban = function ban() {
+        if($scope.ops[$scope.currUser] !== undefined) {
+            var banUser = document.getElementById('userban').value;
+            socket.emit('ban', {
+                user: banUser,
+                room: $scope.roomName
+            });
+            console.log('ban sent');
+        }
+        else {
+            console.log('ban not sent');
+        }
+    }
+    
+    socket.on('banned', function (room, user, baner) {
+        if($scope.currUser === user) {
+            
+            // TODO: Í hvert skifti sem hann er kick-aður, þá fær hann
+            //      alert 1+ oftar.
+            
+            $location.path('/' + $scope.currUser + '/rooms');
+            alert("I'm not your buddy, guy!\nYou were just banned from " + room + " by " + baner);
+        }
+    });
+    
+    $scope.unban = function unban() {
+        if($scope.ops[$scope.currUser] !== undefined) {
+            var banUser = document.getElementById('userban').value;
+            socket.emit('unban', {
+                user: banUser,
+                room: $scope.roomName
+            });
+            console.log('ban sent');
+        }
+        else {
+            console.log('ban not sent');
+        }
     }
 });

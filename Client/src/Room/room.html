@@ -5,8 +5,19 @@
                 <h2>{{roomName}}</h2>
                 <h3>{{roomTopic}}</h3>
             </dev>
-            <div class="col-lg-4">
+            <div class="col-lg-2">
                 <dev class="panel-body">
+                    <h4>Ops</h4>
+                    <div class="list-group">
+                        <button type="button" class="list-group-item" ng-repeat="op in ops">
+                            {{op}}
+                        </button>
+                    </div>
+                </dev>
+            </div>
+            <div class="col-lg-2">
+                <dev class="panel-body">
+                <h4>Users</h4>
                     <div class="list-group">
                         <button type="button" id="popover" class="list-group-item" ng-repeat="user in users">
                             {{user}}
@@ -32,9 +43,22 @@
     </dev>
     <div class="row">
         <button class="btn btn-default" ng-click="go()">Screw yu guys, I'm a-going home!</button>
+        <div id="kick" style="visibility: hidden">
+            <select id="userkick">
+                <option id="{{user}}" value="{{user}}" ng-repeat="user in users">{{user}}</option>
+            </select>
+            <button ng-click="kick()">Kick</button>
+        </div>
+        <div id="ban" style="visibility: hidden">
+            <select id="userban">
+                <option id="{{user}}" value="{{user}}" ng-repeat="user in allUsers">{{user}}</option>
+            </select>
+            <button ng-click="ban()">Ban</button>
+            <button ng-click="unban()">Unban</button>
+        </div>
         
-        <button type="button" id="popover" class="user-pop list-group-item" data-toggle="popover">
+        <!--<button type="button" id="popover" class="user-pop list-group-item" data-toggle="popover">
             Click to toggle popover
-        </button>
+        </button>-->
     </div>
 </div>

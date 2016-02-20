@@ -33,7 +33,7 @@ angular.module('chatApp').controller('RoomsController', function($scope, socket,
 	socket.on('userlist', function(usersList){
 		$scope.users = usersList;
 	});
-    
+        
     socket.on('recv_privatemsg', function (sender, msg) {
         if(sendTo === sender) {
                 $scope.msgs.push({
