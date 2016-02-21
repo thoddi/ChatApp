@@ -14,25 +14,10 @@ angular.module('chatApp').controller('RoomController', function($scope, socket, 
         pass: undefined
     };
     
-    // TODO: Sjá til þess að þegar einhver býr til herbergi
-    //          þá er notandinn á listanum.
-    
-    socket.emit('rooms');
-    socket.on('roomlist', function (rooms) {
-        if(rooms[$scope.roomName] !== undefined) {
-            if(rooms[$scope.roomName].banned[$scope.currUser] !== undefined) {
-                // TODO: Í hvert skifti sem hann er kick-aður, þá fær hann
-            //      alert 1+ oftar.
-            
-            $location.path('/' + $scope.currUser + '/rooms');
-            alert("I'm not your guy, buddy!\nYou are banned from " + room + " by " + baner);
-            }
-        }
-    });
-    
     socket.emit('joinroom', joinObj, function (success, reason) {
         if(!success) {
             alert(reason);
+            $location.path('/' + $scope.currUser + '/rooms');
         }
     });
     socket.on('updateusers', function(room, users, ops) {
@@ -84,13 +69,13 @@ angular.module('chatApp').controller('RoomController', function($scope, socket, 
     };
     
     socket.on('kicked', function (room, user, baner) {
-        if($scope.currUser === user) {
-            
+        if($scope.currUser === user && $scope.roomName === room) {
+            console.log($scope.roomName + " " + room);
             // TODO: Í hvert skifti sem hann er kick-aður, þá fær hann
             //      alert 1+ oftar.
             
             $location.path('/' + $scope.currUser + '/rooms');
-            alert("I'm not your friend, buddy!\nYou were just kicked out of " + room + " by " + baner);
+            //alert("I'm not your friend, buddy!\nYou were just kicked out of " + room + " by " + baner);
         }
     });
     
@@ -109,13 +94,13 @@ angular.module('chatApp').controller('RoomController', function($scope, socket, 
     }
     
     socket.on('banned', function (room, user, baner) {
-        if($scope.currUser === user) {
-            
+        if($scope.currUser === user && $scope.roomName === room) {
+            console.log($scope.roomName + " " + room);
             // TODO: Í hvert skifti sem hann er kick-aður, þá fær hann
             //      alert 1+ oftar.
             
             $location.path('/' + $scope.currUser + '/rooms');
-            alert("I'm not your buddy, guy!\nYou were just banned from " + room + " by " + baner);
+            //alert("I'm not your buddy, guy!\nYou were just banned from " + room + " by " + baner);
         }
     });
     
